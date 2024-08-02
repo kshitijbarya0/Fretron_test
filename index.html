@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Paths</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            margin: 5%;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="flightCanvas" width="500" height="500">
+        <h1>Flight paths</h1>
+    </canvas>
+    <script>
+        const flights = [
+            { name: "Flight 1", coordinates: [[1, 1], [2, 2], [3, 3]] },
+            { name: "Flight 2", coordinates: [[1, 1], [2, 4], [3, 2]] },
+            { name: "Flight 3", coordinates: [[1, 1], [4, 2], [3, 4]] }
+        ];
+
+        const canvas = document.getElementById('flightCanvas');
+        canvas.innerText = "Flight Paths";
+        const ctx = canvas.getContext('2d');
+
+        function drawFlightPath(flight, color) {
+            ctx.beginPath();
+            ctx.moveTo(flight.coordinates[0][0], flight.coordinates[0][1]);
+            for (let i = 1; i < flight.coordinates.length; i++) {
+                if(flight.coordinates[i][0]!=flight.coordinates[i][1]){
+                    ctx.lineTo(flight.coordinates[i][0]*100, flight.coordinates[i][1] * 100);
+                }
+            }
+           
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        }
+
+        const colors = ["red", "black", "yellow"];
+        flights.forEach((flight, index) => {
+            drawFlightPath(flight, colors[index]);
+        });
+    </script>
+</body>
+</html>
+
+<!-- google source link for canvas in javascript  
+ 
+  1) https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
+
+-->
